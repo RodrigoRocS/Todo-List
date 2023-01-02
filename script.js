@@ -67,7 +67,6 @@ const criaBtnClear = () => {
   btnDaGalera.addEventListener('click', () => {
     const pegaOl = document.getElementById('lista-tarefas');
     pegaOl.innerHTML = '';
-    salvaOl();
   });
   pegaBody.appendChild(btnDaGalera);
 };
@@ -94,6 +93,69 @@ const criaBtnSalvaOl = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const movBaixo = () => {
+  const pegaLis = document.getElementsByTagName('li');
+  let indexValor = null;
+  for (let index = 0; index < pegaLis.length; index += 1) {
+    if (pegaLis[index].style.backgroundColor === 'gray') {
+      indexValor = index;
+    }
+  }
+  if (indexValor < pegaLis.length - 1 && indexValor !== null) {
+    const liAux = pegaLis[indexValor].innerHTML;
+    const corAux = pegaLis[indexValor].style.backgroundColor;
+    const classAux = pegaLis[indexValor].className;
+    pegaLis[indexValor].innerHTML = pegaLis[indexValor + 1].innerHTML;
+    pegaLis[indexValor].style.backgroundColor = pegaLis[indexValor + 1].style.backgroundColor;
+    pegaLis[indexValor].className = pegaLis[indexValor + 1].className;
+    pegaLis[indexValor + 1].innerHTML = liAux;
+    pegaLis[indexValor + 1].style.backgroundColor = corAux;
+    pegaLis[indexValor + 1].className = classAux;
+  }
+};
+
+const movCima = () => {
+  const pegaLis = document.getElementsByTagName('li');
+  for (let index = 1; index < pegaLis.length; index += 1) {
+    if (pegaLis[index].style.backgroundColor === 'gray') {
+      const liAux = pegaLis[index].innerHTML;
+      const corAux = pegaLis[index].style.backgroundColor;
+      const classAux = pegaLis[index].className;
+      pegaLis[index].innerHTML = pegaLis[index - 1].innerHTML;
+      pegaLis[index].style.backgroundColor = pegaLis[index - 1].style.backgroundColor;
+      pegaLis[index].className = pegaLis[index - 1].className;
+      pegaLis[index - 1].innerHTML = liAux;
+      pegaLis[index - 1].style.backgroundColor = corAux;
+      pegaLis[index - 1].className = classAux;
+    }
+  }
+};
+
+const criaBtnCima = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'mover-cima';
+  btnDaGalera.innerText = 'Cima';
+  btnDaGalera.addEventListener('click', movCima);
+  pegaBody.appendChild(btnDaGalera);
+};
+
+const criaBtnBaixo = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'mover-baixo';
+  btnDaGalera.innerText = 'Baixo';
+  btnDaGalera.addEventListener('click', movBaixo);
+  pegaBody.appendChild(btnDaGalera);
+};
+
+const botoesDaGalera = () => {
+  criaBtnAdd();
+  criaBtnClear();
+  criaBtnLimpaCompl();
+  criaBtnSalvaOl();
+  criaBtnCima();
+  criaBtnBaixo();
+};
+
 const carregaOl = () => {
   const pegaOl = document.getElementById('lista-tarefas');
   pegaOl.innerHTML = localStorage.getItem('ol');
@@ -104,9 +166,6 @@ window.onload = () => {
   criaParagr();
   criaInput();
   criaLO();
-  criaBtnAdd();
-  criaBtnClear();
-  criaBtnLimpaCompl();
-  criaBtnSalvaOl();
+  botoesDaGalera();
   carregaOl();
 };
