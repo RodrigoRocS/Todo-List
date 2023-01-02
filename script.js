@@ -35,14 +35,10 @@ const liSelect = (e) => {
 };
 
 const liCompleted = (e) => {
-  if (e.target.className === 'completed') {
-    e.target.classList.remove('completed');
-  } else {
-    e.target.classList.add('completed');
-  }
+  e.target.classList.toggle('completed');
 };
 
-const criaBtn = () => {
+const criaBtnAdd = () => {
   const btnDaGalera = document.createElement('button');
   const pegaInput = document.getElementById('texto-tarefa');
   const pegaOl = document.getElementById('lista-tarefas');
@@ -59,10 +55,37 @@ const criaBtn = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const criaBtnClear = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'apaga-tudo';
+  btnDaGalera.innerText = 'Clear';
+  btnDaGalera.addEventListener('click', () => {
+    const pegaOl = document.getElementById('lista-tarefas');
+    pegaOl.innerHTML = '';
+  });
+  pegaBody.appendChild(btnDaGalera);
+};
+
+const criaBtnLimpaCompl = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'remover-finalizados';
+  btnDaGalera.innerText = 'Remove Finalizados';
+  btnDaGalera.addEventListener('click', () => {
+    const pegaOl = document.getElementById('lista-tarefas');
+    const pegaCompleted = document.querySelectorAll('.completed');
+    for (let index = 0; index < pegaCompleted.length; index += 1) {
+      pegaOl.removeChild(pegaCompleted[index]);
+    }
+  });
+  pegaBody.appendChild(btnDaGalera);
+};
+
 window.onload = () => {
   criaHeader();
   criaParagr();
   criaInput();
   criaLO();
-  criaBtn();
+  criaBtnAdd();
+  criaBtnClear();
+  criaBtnLimpaCompl();
 };
