@@ -106,7 +106,8 @@ const movBaixo = () => {
     const corAux = pegaLis[indexValor].style.backgroundColor;
     const classAux = pegaLis[indexValor].className;
     pegaLis[indexValor].innerHTML = pegaLis[indexValor + 1].innerHTML;
-    pegaLis[indexValor].style.backgroundColor = pegaLis[indexValor + 1].style.backgroundColor;
+    pegaLis[indexValor].style.backgroundColor =
+      pegaLis[indexValor + 1].style.backgroundColor;
     pegaLis[indexValor].className = pegaLis[indexValor + 1].className;
     pegaLis[indexValor + 1].innerHTML = liAux;
     pegaLis[indexValor + 1].style.backgroundColor = corAux;
@@ -122,7 +123,8 @@ const movCima = () => {
       const corAux = pegaLis[index].style.backgroundColor;
       const classAux = pegaLis[index].className;
       pegaLis[index].innerHTML = pegaLis[index - 1].innerHTML;
-      pegaLis[index].style.backgroundColor = pegaLis[index - 1].style.backgroundColor;
+      pegaLis[index].style.backgroundColor =
+        pegaLis[index - 1].style.backgroundColor;
       pegaLis[index].className = pegaLis[index - 1].className;
       pegaLis[index - 1].innerHTML = liAux;
       pegaLis[index - 1].style.backgroundColor = corAux;
@@ -147,6 +149,24 @@ const criaBtnBaixo = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const removeSelecionado = () => {
+  const pegaOl = document.getElementById('lista-tarefas');
+  const pegaLis = document.getElementsByTagName('li');
+  for (let index = 1; index < pegaLis.length; index += 1) {
+    if (pegaLis[index].style.backgroundColor === 'gray') {
+      pegaOl.removeChild(pegaLis[index]);
+    }
+  }
+};
+
+const criaBtnRemSelec = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'remover-selecionado';
+  btnDaGalera.innerText = 'Remove Seleção';
+  btnDaGalera.addEventListener('click', removeSelecionado);
+  pegaBody.appendChild(btnDaGalera);
+};
+
 const botoesDaGalera = () => {
   criaBtnAdd();
   criaBtnClear();
@@ -154,6 +174,7 @@ const botoesDaGalera = () => {
   criaBtnSalvaOl();
   criaBtnCima();
   criaBtnBaixo();
+  criaBtnRemSelec();
 };
 
 const carregaOl = () => {
