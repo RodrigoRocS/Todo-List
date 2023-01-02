@@ -55,6 +55,11 @@ const criaBtnAdd = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const salvaOl = () => {
+  const pegaOl = document.getElementById('lista-tarefas');
+  localStorage.setItem('ol', pegaOl.innerHTML);
+};
+
 const criaBtnClear = () => {
   const btnDaGalera = document.createElement('button');
   btnDaGalera.id = 'apaga-tudo';
@@ -62,6 +67,7 @@ const criaBtnClear = () => {
   btnDaGalera.addEventListener('click', () => {
     const pegaOl = document.getElementById('lista-tarefas');
     pegaOl.innerHTML = '';
+    salvaOl();
   });
   pegaBody.appendChild(btnDaGalera);
 };
@@ -80,6 +86,19 @@ const criaBtnLimpaCompl = () => {
   pegaBody.appendChild(btnDaGalera);
 };
 
+const criaBtnSalvaOl = () => {
+  const btnDaGalera = document.createElement('button');
+  btnDaGalera.id = 'salvar-tarefas';
+  btnDaGalera.innerText = 'Salva Lista';
+  btnDaGalera.addEventListener('click', salvaOl);
+  pegaBody.appendChild(btnDaGalera);
+};
+
+const carregaOl = () => {
+  const pegaOl = document.getElementById('lista-tarefas');
+  pegaOl.innerHTML = localStorage.getItem('ol');
+};
+
 window.onload = () => {
   criaHeader();
   criaParagr();
@@ -88,4 +107,6 @@ window.onload = () => {
   criaBtnAdd();
   criaBtnClear();
   criaBtnLimpaCompl();
+  criaBtnSalvaOl();
+  carregaOl();
 };
