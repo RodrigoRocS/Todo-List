@@ -6,6 +6,15 @@ const criaHeader = () => {
   pegaBody.appendChild(headerDaGalera);
 };
 
+const criaParagr = () => {
+  const paragrDaGalera = document.createElement('p');
+  paragrDaGalera.innerText =
+    'Clique duas vezes em um item para marcá-lo como completo';
+  paragrDaGalera.id = 'funcionamento';
+  pegaBody.appendChild(paragrDaGalera);
+};
+
 window.onload = () => {
   criaHeader();
+  criaParagr();
 };
