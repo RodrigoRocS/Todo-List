@@ -34,6 +34,14 @@ const liSelect = (e) => {
   e.target.style.backgroundColor = 'gray';
 };
 
+const liCompleted = (e) => {
+  if (e.target.className === 'completed') {
+    e.target.classList.remove('completed');
+  } else {
+    e.target.classList.add('completed');
+  }
+};
+
 const criaBtn = () => {
   const btnDaGalera = document.createElement('button');
   const pegaInput = document.getElementById('texto-tarefa');
@@ -42,8 +50,9 @@ const criaBtn = () => {
   btnDaGalera.innerText = 'Adicionar';
   btnDaGalera.addEventListener('click', () => {
     const liDaGalera = document.createElement('li');
-    liDaGalera.addEventListener('click', liSelect);
     liDaGalera.innerHTML = pegaInput.value;
+    liDaGalera.addEventListener('dblclick', liCompleted);
+    liDaGalera.addEventListener('click', liSelect);
     pegaOl.appendChild(liDaGalera);
     pegaInput.value = '';
   });
