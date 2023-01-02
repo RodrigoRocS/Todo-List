@@ -26,6 +26,14 @@ const criaLO = () => {
   pegaBody.appendChild(olDaGalera);
 };
 
+const liSelect = (e) => {
+  const pegaLis = document.getElementsByTagName('li');
+  for (let index = 0; index < pegaLis.length; index += 1) {
+    pegaLis[index].style.backgroundColor = 'unset';
+  }
+  e.target.style.backgroundColor = 'gray';
+};
+
 const criaBtn = () => {
   const btnDaGalera = document.createElement('button');
   const pegaInput = document.getElementById('texto-tarefa');
@@ -34,9 +42,7 @@ const criaBtn = () => {
   btnDaGalera.innerText = 'Adicionar';
   btnDaGalera.addEventListener('click', () => {
     const liDaGalera = document.createElement('li');
-    liDaGalera.addEventListener('click', () => {
-      liDaGalera.style.backgroundColor = 'gray';
-    });
+    liDaGalera.addEventListener('click', liSelect);
     liDaGalera.innerHTML = pegaInput.value;
     pegaOl.appendChild(liDaGalera);
     pegaInput.value = '';
