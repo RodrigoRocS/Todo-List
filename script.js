@@ -14,7 +14,21 @@ const criaParagr = () => {
   pegaBody.appendChild(paragrDaGalera);
 };
 
+const criaInput = () => {
+  const inputDaGalera = document.createElement('input');
+  inputDaGalera.id = 'texto-tarefa';
+  pegaBody.appendChild(inputDaGalera);
+};
+
+const criaLO = () => {
+  const olDaGalera = document.createElement('ol');
+  olDaGalera.id = 'lista-tarefas';
+  pegaBody.appendChild(olDaGalera);
+};
+
 window.onload = () => {
   criaHeader();
   criaParagr();
+  criaInput();
+  criaLO();
 };
