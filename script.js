@@ -26,9 +26,28 @@ const criaLO = () => {
   pegaBody.appendChild(olDaGalera);
 };
 
+const criaBtn = () => {
+  const btnDaGalera = document.createElement('button');
+  const pegaInput = document.getElementById('texto-tarefa');
+  const pegaOl = document.getElementById('lista-tarefas');
+  btnDaGalera.id = 'criar-tarefa';
+  btnDaGalera.innerText = 'Adicionar';
+  btnDaGalera.addEventListener('click', () => {
+    const liDaGalera = document.createElement('li');
+    liDaGalera.addEventListener('click', () => {
+      liDaGalera.style.backgroundColor = 'gray';
+    });
+    liDaGalera.innerHTML = pegaInput.value;
+    pegaOl.appendChild(liDaGalera);
+    pegaInput.value = '';
+  });
+  pegaBody.appendChild(btnDaGalera);
+};
+
 window.onload = () => {
   criaHeader();
   criaParagr();
   criaInput();
   criaLO();
+  criaBtn();
 };
